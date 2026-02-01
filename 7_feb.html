@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Bishakha 💗</title>
+<style>
+/* --- Fonts --- */
+@import url('https://fonts.googleapis.com/css?family=Lily+Script+One');
+@import url('https://fonts.googleapis.com/css2?family=Poor+Story&display=swap');
+
+/* --- RESET --- */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* --- BODY --- */
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: cursive;
+  overflow: hidden;
+  background: url('https://i.postimg.cc/L6BCDwj4/night-snowy-mountain-scenery-digital-art-4k-wallpaper-uhdpaper-com-934-0-i.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* --- TEASER --- */
+.container {
+  width: 90%;
+  max-width: 560px;
+  margin: 50px auto;
+  background-color: rgba(245,245,220,0.26);
+  padding: 20px;
+  border-radius: 20px;
+  text-align: left;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+p.teaser {
+  font-size: 2em;
+  color: #ff0202;
+  text-shadow: 0px 1px 5px #f5deb3;
+  font-weight: 700;
+}
+
+.spoiler-text { color:red; cursor:pointer; display:block; margin-top:20px; }
+
+/* --- LETTER --- */
+#letter {
+  display: none;
+  width: 90%;
+  max-width: 600px;
+  height: 80vh;
+  margin: 20px auto;
+  background: rgba(0,0,0,0.6);
+  border-radius: 15px;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+  color: white;
+  font-family: 'Poor Story', cursive;
+  font-size: 1.3em;
+}
+
+#letter h1.center { text-align:center; font-size:2em; color:#ff6; margin-bottom:20px; }
+
+#letter p { margin: 1em 0; line-height:1.4em; }
+#letter p.center { text-align:center; font-weight:700; color:#ff4d88; }
+
+/* --- BUTTONS --- */
+.button {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 10px;
+  background: #ff4d88;
+  color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.button.no { background:#ddd; color:#555; }
+
+.button-container { text-align:center; margin-top:20px; position:sticky; bottom:0; background:rgba(0,0,0,0.3); padding-top:10px; }
+
+/* --- HEARTS --- */
+.heart {
+  position: absolute;
+  bottom: -10px;
+  color: #ff4d88;
+  animation: floatUp 6s infinite;
+  font-size: 18px;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity:1; }
+  100% { transform: translateY(-700px); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- TEASER -->
+<div class="container" id="teaser">
+  <p class="teaser">
+    You Know What? <br>
+    Whenever I look at you, suddenly<br>
+    I forget all the things...
+    <span class="spoiler-text" onclick="showLetter()">Click Here 💖</span>
+  </p>
+</div>
+
+<!-- LETTER -->
+<div id="letter">
+  <h1 class="center">7th Feb 2026</h1>
+
+  <p>Hey Bishakha,</p>
+
+  <p>Ever since we started talking, every conversation with you has become my favorite part of the day. Your laugh, your voice, and the way you make me smile… I can’t stop thinking about you.</p>
+
+  <p>I’ve realized I want more than just friendship. I want to be there for you, support you, and share every little moment of happiness and laughter together.</p>
+
+  <p class="center">So… will you be my girlfriend? 💕</p>
+
+  <!-- BUTTONS -->
+  <div class="button-container">
+    <div class="button" id="yesBtn" onclick="sayYes()">Yes 💕</div>
+    <div class="button no" id="noBtn" onclick="moveNo()">No 🙈</div>
+  </div>
+
+  <p class="center" id="message"></p>
+</div>
+
+<script>
+let yesSize = 18;
+
+function showLetter() {
+  document.getElementById('teaser').style.display = 'none';
+  const letter = document.getElementById('letter');
+  letter.style.display = 'block';
+
+  // Animate date first
+  const dateEl = letter.querySelector("h1.center");
+  const dateText = dateEl.innerHTML;
+  dateEl.innerHTML = "";
+  let dateIndex = 0;
+
+  function typeDate() {
+    if (dateIndex < dateText.length) {
+      dateEl.innerHTML += dateText.charAt(dateIndex);
+      dateIndex++;
+      setTimeout(typeDate, 80);
+    } else {
+      // After date, animate paragraphs
+      animateParagraphs();
+    }
+  }
+  typeDate();
+}
+
+function animateParagraphs() {
+  const letter = document.getElementById('letter');
+  const paragraphs = letter.querySelectorAll("p");
+  paragraphs.forEach(p => { p.style.visibility = "hidden"; });
+
+  let index = 0;
+  function typeParagraph() {
+    if (index >= paragraphs.length) return;
+    const p = paragraphs[index];
+    const text = p.innerHTML;
+    p.innerHTML = "";
+    p.style.visibility = "visible";
+
+    let charIndex = 0;
+    function typeChar() {
+      if (charIndex < text.length) {
+        p.innerHTML += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 80);
+      } else {
+        index++;
+        setTimeout(typeParagraph, 400);
+      }
+    }
+    typeChar();
+  }
+  typeParagraph();
+}
+
+function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  const x = Math.random()*150 - 75;
+  const y = Math.random()*20 - 10;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+  yesSize += 2;
+  document.getElementById("yesBtn").style.fontSize = yesSize + "px";
+}
+
+function sayYes() {
+  document.getElementById("yesBtn").style.display = 'none';
+  document.getElementById("noBtn").style.display = 'none';
+  const msg = document.getElementById("message");
+  msg.innerHTML = "";
+  const text = `YAYYYY 🎉💗 I'm so happy! Can't wait to talk to you 🥹✨`;
+  let i = 0;
+  function typeYes() {
+    if (i < text.length) {
+      msg.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeYes, 50);
+    } else {
+      createHearts();
+    }
+  }
+  typeYes();
+}
+
+function createHearts() {
+  for(let i=0;i<25;i++){
+    let heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💗";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  }
+}
+</script>
+
+</body>
+</html>
